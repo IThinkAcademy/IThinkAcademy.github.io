@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -359,6 +360,15 @@
         gap: 13.4px;
         margin-top: 13.4px;
       }
+      .course-card1 {
+        font-weight: normal;
+        border: 1.34px solid #173954;
+        border-radius: 6.7px;
+        background-color: #1e1e1e;
+        padding: 13.4px;
+        color: #8fc6e3;
+        box-shadow: 0 2.68px 5.36px rgba(0, 0, 0, 0.2);
+      }
 
       .course-card {
         font-weight: normal;
@@ -694,6 +704,11 @@
       .description:hover {
         box-shadow: 0px 4px 20px rgba(74, 144, 226, 0.5);
       }
+      
+      .glow:hover{
+         box-shadow: 0px 4px 20px rgba(74, 144, 226, 0.5);
+      }
+      }
 
       .description {
         padding-left: 10px !important;
@@ -775,43 +790,44 @@
             </a>
           </section>
         </extra-box>
-        <extra-box class="extra-box">
-          <div>
-            <h2 class="tittle">Games</h2>
-            <p class="description">Play coding games to practice and learn more! These games help you master skills while having fun.</p>
-            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-              <defs>
-                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-              </defs>
-              <g class="parallax">
-                <use xlink:href="#gentle-wave" x="0" y="0" fill="rgba(44, 121, 255, 0.7)" />
-                <use xlink:href="#gentle-wave" x="300" y="0" fill="rgba(44, 121, 255, 0.7)" />
-                <use xlink:href="#gentle-wave" x="0" y="3" fill="rgba(44, 121, 255, 0.5)" />
-                <use xlink:href="#gentle-wave" x="300" y="3" fill="rgba(44, 121, 255, 0.5)" />
-                <use xlink:href="#gentle-wave" x="0" y="5" fill="rgba(44, 121, 255, 0.3)" />
-                <use xlink:href="#gentle-wave" x="300" y="5" fill="rgba(44, 121, 255, 0.3)" />
-                <use xlink:href="#gentle-wave" x="0" y="7" fill="rgb(0, 61, 122)" />
-                <use xlink:href="#gentle-wave" x="300" y="7" fill="rgb(0, 61, 122)" />
-              </g>
-            </svg>
-          </div>
-          <section id="games" class="section">
-            <h2>Games</h2>
-            <p>Play coding games to practice and learn more! These games help you master skills while having fun.</p>
-            <ul>
-              <li>
-                <strong>Code Quest:</strong> Solve coding puzzles to level up!
-              </li>
-              <li>
-                <strong>Debug Hero:</strong> Find bugs in code to save the day.
-              </li>
-              <li>
-                <strong>Robot Maze:</strong> Program your robot to get through the maze.
-              </li>
-            </ul>
-          </section>
-        </extra-box>
-        <extra-box class="extra-box extra-box-reverse">
+<extra-box class="extra-box extra-box-reverse">
+  <div>
+    <h2 class="tittle">Games</h2>
+    <a href="Games">
+      <p class="description">We use games and interactive mediums to capture our students' attention. By incorporating game design and fun elements, students naturally engage and gain valuable knowledge about coding.</p>
+    </a>
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+      <defs>
+        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+      </defs>
+      <g class="parallax">
+        <use xlink:href="#gentle-wave" x="0" y="0" fill="rgba(44, 121, 255, 0.7)" />
+        <use xlink:href="#gentle-wave" x="300" y="0" fill="rgba(44, 121, 255, 0.7)" />
+        <use xlink:href="#gentle-wave" x="0" y="3" fill="rgba(44, 121, 255, 0.5)" />
+        <use xlink:href="#gentle-wave" x="300" y="3" fill="rgba(44, 121, 255, 0.5)" />
+        <use xlink:href="#gentle-wave" x="0" y="5" fill="rgba(44, 121, 255, 0.3)" />
+        <use xlink:href="#gentle-wave" x="300" y="5" fill="rgba(44, 121, 255, 0.3)" />
+        <use xlink:href="#gentle-wave" x="0" y="7" fill="rgb(0, 61, 122)" />
+        <use xlink:href="#gentle-wave" x="300" y="7" fill="rgb(0, 61, 122)" />
+      </g>
+    </svg>
+  </div>
+<section id="Games" class="section glow" style="max-width: 300px; cursor: pointer;" onclick="window.location.href='Games';" style="cursor: pointer;">
+  <h2>Game Development</h2>
+  <p>Unlock the World of Programming Through Gaming</p>
+  <ul>
+    <li style="margin-top: 15px;" class="course-card1"><strong>Game Gallery:</strong> We proudly showcase games created by students, inspiring curiosity and exploration of game mechanics</li>
+    <li style="margin-top: 15px;" class="course-card1"><strong>Critical Thinking:</strong> Kids are encouraged to think about how games are made, sparking creativity and innovation</li>
+    <li style="margin-top: 15px;" class="course-card1"><strong>Path to Innovation:</strong> These games are more than fun—they're stepping stones to a future in programming</li>
+  </ul>
+  <div class="view-more" style="margin-top: 15px;">
+    <a href="Games">⇢ Game Gallery</a>
+  </div>
+</section>
+
+</extra-box>
+
+        <extra-box class="extra-box ">
           <div>
             <h2 class="tittle">Projects</h2>
             <p class="description">Start your own projects! Follow our guides or make your own ideas come to life.</p>
@@ -1219,10 +1235,6 @@
           // Remove the last character from the hash
           hash = hash.slice(0, -1);
           const targetSection = document.querySelector(hash); // Select the target section
-          const parent = targetSection.parentElement;
-          const targetY = targetSection.offsetTop - parent.offsetTop;
-          const rect = targetSection.getBoundingClientRect();
-          const absoluteY = rect.top + window.scrollY;
           if (targetSection) {
             // Scroll to the section smoothly
            window.scrollTo({
@@ -1249,11 +1261,11 @@
           const parent = targetSection.parentElement;
           // Get the target section's offset relative to its parent container
           const targetY = targetSection.offsetTop - parent.offsetTop;
-          //console.log(targetY); // Logs the Y value relative to the parent container
+          console.log(targetY); // Logs the Y value relative to the parent container
           // Or use getBoundingClientRect() for a more reliable position
           const rect = targetSection.getBoundingClientRect();
           const absoluteY = rect.top + window.scrollY; // Gets position relative to document
-          //console.log(absoluteY); // Logs the absolute Y value (relative to the document)
+          console.log(absoluteY); // Logs the absolute Y value (relative to the document)
           if (targetSection) {
             // Smoothly scroll to the target section
             /*
