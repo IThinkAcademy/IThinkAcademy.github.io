@@ -1,35 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Content</title>
-    <script>
-        function loadContent() {
-            const isMobile = window.innerWidth <= 768;
-            const contentDiv = document.getElementById("content");
+<script>
+    function loadContent() {
+        const isMobile = window.innerWidth <= 768;
+        const contentDiv = document.getElementById("content");
 
-            const htmlFile = isMobile ? 'mobile.html' : 'desktop.html';
+        const htmlFile = isMobile ? 'mobile.html' : 'desktop.html';
 
-            // Fetch the appropriate HTML file and inject it into the content div
-            fetch(htmlFile)
-                .then(response => response.text())
-                .then(data => {
-                    contentDiv.innerHTML = data;
-                })
-                .catch(error => {
-                    console.error("Error loading content: ", error);
-                    contentDiv.innerHTML = "<p>Sorry, there was an error loading the content.</p>";
+        fetch(htmlFile)
+            .then(response => response.text())
+            .then(data => {
+                // Inject fetched HTML content
+                contentDiv.innerHTML = data;
+
+                // Dynamically load and execute any scripts found in the content
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = data;
+                const scripts = tempDiv.querySelectorAll('script');
+                scripts.forEach(script => {
+                    const newScript = document.createElement('script');
+                    if (script.src) {
+                        // If the script has a `src`, load it dynamically
+                        newScript.src = script.src;
+                        newScript.async = true;
+                    } else {
+                        // If the script is inline, copy its content
+                        newScript.textContent = script.textContent;
+                    }
+                    document.body.appendChild(newScript);
                 });
-        }
+            })
+            .catch(error => {
+                console.error("Error loading content: ", error);
+                contentDiv.innerHTML = "<p>Sorry, there was an error loading the content.</p>";
+            });
+    }
 
-        window.onload = loadContent;
-        window.onresize = loadContent; // Recheck on resize
-    </script>
-</head>
-<body>
-    <div id="content">
-        <!-- Content will be dynamically loaded based on the device -->
-    </div>
-</body>
-</html>
+    window.onload = loadContent;
+    window.onresize = loadContent; // Recheck on resize
+</script>
