@@ -1219,6 +1219,10 @@
           // Remove the last character from the hash
           hash = hash.slice(0, -1);
           const targetSection = document.querySelector(hash); // Select the target section
+          const parent = targetSection.parentElement;
+          const targetY = targetSection.offsetTop - parent.offsetTop;
+          const rect = targetSection.getBoundingClientRect();
+          const absoluteY = rect.top + window.scrollY;
           if (targetSection) {
             // Scroll to the section smoothly
            window.scrollTo({
@@ -1245,11 +1249,11 @@
           const parent = targetSection.parentElement;
           // Get the target section's offset relative to its parent container
           const targetY = targetSection.offsetTop - parent.offsetTop;
-          console.log(targetY); // Logs the Y value relative to the parent container
+          //console.log(targetY); // Logs the Y value relative to the parent container
           // Or use getBoundingClientRect() for a more reliable position
           const rect = targetSection.getBoundingClientRect();
           const absoluteY = rect.top + window.scrollY; // Gets position relative to document
-          console.log(absoluteY); // Logs the absolute Y value (relative to the document)
+          //console.log(absoluteY); // Logs the absolute Y value (relative to the document)
           if (targetSection) {
             // Smoothly scroll to the target section
             /*
