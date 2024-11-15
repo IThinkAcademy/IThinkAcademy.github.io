@@ -1,12 +1,1314 @@
-<script>
-    window.onload = function() {
-        const isMobile = window.innerWidth <= 768; // Check if on mobile
-        const currentHash = window.location.hash; // Get the current hash (e.g., #parts)
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/IThinkAcademy/Resources/refs/heads/main/my-favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/IThinkAcademy/Resources/refs/heads/main/my-favicon/favicon.svg" />
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/IThinkAcademy/Resources/refs/heads/main/my-favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/IThinkAcademy/Resources/refs/heads/main/my-favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="IThink" />
+    <link rel="manifest" href="https://raw.githubusercontent.com/IThinkAcademy/Resources/refs/heads/main/my-favicon/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initializing Thinkers Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initializing Thinkers Academy</title>
+    <!-- ICO Favicon -->
+    <link rel="icon" type="image/png" href="micrologo.svg">
+    <style>
+      /* Pricing Container */
+      .pricing-container {
+        text-align: center;
+        max-width: 1000px;
+        padding: 30px;
+      }
 
-        // Set target HTML file based on device type
-        const targetFile = isMobile ? "mobile.html" : "desktop.html";
+      .pricing-container h1 {
+        color: #0a66c2;
+        font-size: 2em;
+      }
 
-        // Redirect to the target file with the hash
-        window.location.href = targetFile + currentHash;
-    };
-</script>
+      .snip1404 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        /*margin: 20px auto;*/
+        width: 100%;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      .plan {
+        background-color: #1b263b;
+        border-radius: 10px;
+        width: 27%;
+        /*margin: 10px;*/
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transform: translateX(100px);
+        animation: slideIn 0.5s forwards;
+        transition: transform 1s, box-shadow 0.3s;
+      }
+
+      /* Plan Animations */
+      /* First plan slides in from the left */
+      .plan:nth-child(1) {
+        animation: slideInLeft 0.4s forwards;
+        animation-delay: 0.4s;
+      }
+
+      /* Second plan jumps in */
+      .plan:nth-child(2) {
+        animation: jumpEffect 0.5s forwards;
+        animation-delay: 0.6s;
+      }
+
+      /* Third plan slides in from the right */
+      .plan:nth-child(3) {
+        animation: slideIn 0.4s forwards;
+        animation-delay: 0.8s;
+      }
+
+      /* Animation keyframes for sliding in from the left */
+      @keyframes slideInLeft {
+        0% {
+          opacity: 0;
+          transform: translateX(-100px);
+        }
+
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* Animation keyframes for sliding in from the right */
+      @keyframes slideIn {
+        0% {
+          opacity: 0;
+          transform: translateX(100px);
+        }
+
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* Jump effect keyframes */
+      @keyframes jumpEffect {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        50% {
+          opacity: 1;
+          transform: translateY(-15px);
+        }
+
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Plan Hover */
+      .plan:hover {
+        backface-visibility: hidden;
+        filter: blur(0px);
+        box-shadow: 0px 4px 20px rgba(74, 144, 226, 0.5);
+        transform: scale(1.05) !important;
+      }
+
+      /* "Most Popular" Banner */
+      .most-popular {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: #0b25d4;
+        color: #ebfcff;
+        padding: 5px 15px;
+        font-weight: bold;
+        font-size: 0.8em;
+        text-transform: uppercase;
+        border-radius: 0 10px 0 10px;
+      }
+
+      /* Plan Header */
+      .plan header {
+        /*padding: 20px;*/
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+
+      .plan-title {
+        margin: 0;
+        font-size: 1.4em;
+        text-transform: uppercase;
+        color: #e0f7fa;
+      }
+
+      .plan-cost {
+        font-size: 1.3em;
+        color: #ffffff;
+      }
+
+      .plan-type {
+        font-size: 1em;
+        color: #99daff;
+      }
+
+      .plan-features {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        background-color: #1e1e1e;
+        color: #b0b0b0;
+        text-align: left;
+        padding: 5px 10px;
+      }
+
+      .plan-features li {
+        font-size: .72em;
+        padding: 5px 0;
+        border-bottom: 1px solid #0f3e57;
+      }
+
+      .plan-features li:last-child {
+        border-bottom: none;
+      }
+
+      .plan-features li i {
+        margin-right: 8px;
+        color: #42a5f5;
+      }
+
+      /* Plan Select */
+      .plan-select {
+        padding: 10px;
+        text-align: center;
+      }
+
+      .plan-select a {
+        padding: 12px 24px;
+        background-color: #086391;
+        color: #ffffff;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 20px;
+        display: inline-block;
+        transition: background-color 0.3s;
+      }
+
+      .plan-select a:hover {
+        background-color: #64b5f6;
+        color: #1b263b;
+      }
+
+      /* Responsive styling */
+      @media (max-width: 768px) {
+        .plan {
+          width: 100%;
+        }
+      }
+
+      /* Global Styles */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        color: #b0b0b0;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
+      /* Title */
+      .playfair-title {
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+        font-optical-sizing: auto;
+        color: #e0f7fa;
+      }
+
+      /* Background Canvas */
+      #backgroundCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      /* Container */
+      .container {
+        margin: 0 auto;
+        padding: -0px;
+        box-sizing: border-box;
+      }
+
+      /* Header */
+      header {
+        background: linear-gradient(to bottom, #1e88e5, #0b365b);
+        padding: 13.4px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 2.345em;
+        margin: 0;
+      }
+
+      header p {
+        padding: 3px;
+        font-size: 0.804em;
+        margin-top: 6.7px;
+      }
+
+      /* Navigation */
+      nav {
+        display: flex;
+        justify-content: center;
+        background-color: #004ca3;
+        flex-wrap: wrap;
+        box-shadow: 0px 2.68px 13.4px rgba(0, 0, 0, .3);
+      }
+
+      nav a {
+        color: #e0f7fa;
+        text-decoration: none;
+        padding: 8px 13.4px;
+        font-size: 0.871em;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      nav a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 3.35px;
+        left: 50%;
+        background-color: #e0f7fa;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      nav a:hover {
+        color: #ffffff;
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      /* Main Content */
+      .content {
+        text-align: center;
+      }
+
+      /* Section */
+      .section {
+        max-width: 335px;
+        padding: 13px;
+        border-radius: 6.7px;
+        margin: 13px 0;
+        font-weight: bold;
+        color: #2b9cd9;
+        background-color: #1e1e1e;
+        box-shadow: 0 2.68px 5.36px rgba(0, 0, 0, 0.2);
+        border: 1.34px solid #173954;
+        animation: slideIn 0s ease forwards;
+        font-size: 67%;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section h2 {
+        color: #42a5f5;
+        border-bottom: 2px solid #42a5f5;
+        display: inline-block;
+        padding-bottom: 5px;
+        margin-bottom: 20px;
+        margin-top: 0;
+      }
+
+      /* Course Cards */
+      .course-cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 13.4px;
+        margin-top: 13.4px;
+      }
+
+      .course-card1 {
+        font-weight: normal;
+        border: 1.34px solid #173954;
+        border-radius: 6.7px;
+        background-color: #1e1e1e;
+        padding: 13.4px;
+        color: #8fc6e3;
+        box-shadow: 0 2.68px 5.36px rgba(0, 0, 0, 0.2);
+      }
+
+      .course-card {
+        font-weight: normal;
+        border: 1.34px solid #173954;
+        border-radius: 6.7px;
+        background-color: #1e1e1e;
+        padding: 13.4px;
+        color: #8fc6e3;
+        box-shadow: 0 2.68px 5.36px rgba(0, 0, 0, 0.2);
+      }
+
+      .course-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0px 4px 20px rgba(74, 144, 226, 0.5);
+        user-select: none;
+      }
+
+      .course-card h3 {
+        color: #42a5f5;
+        margin-top: 0;
+        margin-bottom: 6.7px;
+      }
+
+      /* Lists in Sections */
+      .section ul {
+        list-style-type: none;
+        padding: 0;
+        text-align: left;
+        max-width: 402px;
+        margin: 0 auto;
+      }
+
+      .section ul li {
+        font-weight: normal;
+        border: 1.34px solid #173954;
+        border-radius: 6.7px;
+        background-color: #1e1e1e;
+        margin: 6.7px 0;
+        padding: 10.05px;
+        color: #8fc6e3;
+      }
+
+      .section ul li strong {
+        color: #42a5f5;
+        font-size: 1.1em;
+      }
+
+      /* Pricing Table */
+      .pricing-table {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        /*gap: 20px;
+        padding: 20px;*/
+      }
+
+      .pricing-plan {
+        font-weight: normal;
+        border: 2px solid #42a5f5;
+        border-radius: 10px;
+        padding: 15px;
+        background-color: #1e1e1e;
+        color: #8fc6e3;
+      }
+
+      .pricing-plan h3 {
+        color: #42a5f5;
+        margin-top: 0;
+      }
+
+      /* Footer Styling */
+      footer {
+        background-color: #004ca3;
+        text-align: center;
+        padding: 15px;
+        color: #bbdefb;
+        font-size: 0.9em;
+      }
+
+      /* Links */
+      a {
+        color: #BBDEFB;
+        text-decoration: none;
+      }
+
+      p {
+        margin-top: 0;
+        /*padding: 5px;*/
+        margin-bottom: 0;
+      }
+
+      /* "View More Courses" button styling */
+      .view-more {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+      }
+
+      .view-more a {
+        display: inline-block;
+        padding: 7px 10px;
+        background-color: #086391;
+        color: #e0f7fa;
+        font-size: 1.1em;
+        font-weight: bold;
+        border-radius: 5px;
+        text-decoration: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s, box-shadow 0.3s;
+      }
+
+      .view-more a:hover {
+        background-color: #64b5f6;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Sliding animations */
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-100%);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideOutLeft {
+        from {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        to {
+          opacity: 0;
+          transform: translateX(-100%);
+        }
+      }
+
+      @keyframes slideOutRight {
+        from {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        to {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+      }
+
+      /* Apply the animations to the extra-box */
+      .extra-box {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        max-width: 1072px;
+        /* 1600px * 0.67 */
+        min-width: 670px;
+        /* 1000px * 0.67 */
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 10px;
+        color: #2b9cd9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        animation-duration: 1.7s;
+        animation-timing-function: ease;
+        animation-fill-mode: forwards;
+        /* Keeps the final state after animation */
+        visibility: hidden;
+        /* Or use opacity: 0; */
+        transition: visibility 0s, opacity 0.5s ease;
+        /* Smooth transition */
+      }
+
+      .extra-box.visible {
+        visibility: visible;
+        /* Or opacity: 1; */
+      }
+
+      .extra-box.slideInLeft {
+        animation-name: slideInLeft;
+      }
+
+      .extra-box.slideInRight {
+        animation-name: slideInRight;
+      }
+
+      .extra-box.slideOutLeft {
+        animation-name: slideOutLeft;
+      }
+
+      .extra-box.slideOutRight {
+        animation-name: slideOutRight;
+      }
+
+      .extra-box h2 {
+        color: #42a5f5;
+        border-bottom: 2px solid #42a5f5;
+        padding-bottom: 5px;
+        margin-top: 0;
+        margin-bottom: 4px;
+        /* Space between title and box */
+      }
+
+      /* New Box */
+      .section {
+        background-color: #1e1e1e;
+        color: #e0f7fa;
+        padding: 15px;
+        width: 45%;
+        /* Adjust width as necessary */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        /*text-align: left;  Ensure left-aligned text */
+      }
+
+      .section h3 {
+        color: #42a5f5;
+        margin-top: 0;
+        /*text-align: left;  Ensure left-alignment for headings */
+      }
+
+      /* Left-aligned text for every other extra-box */
+      .extra-box-reverse {
+        flex-direction: row-reverse;
+        /* Swap left-right placement for alternating extra-boxes */
+      }
+
+      .extra-box-reverse h2,
+      .extra-box-reverse p {
+        text-align: right;
+        /* Align titles and descriptions to the right */
+        direction: rtl;
+        /* Ensure text flows from right to left */
+        overflow: visible;
+        /* Allow overflow on the left side */
+      }
+
+      .extra-box-reverse .section {
+        text-align: left;
+        direction: rtl;
+        /* Make text flow right-to-left */
+      }
+
+      .extra-box-reverse .section h3 {
+        text-align: left;
+        /* Ensure left alignment for headings */
+      }
+
+      .extra-box-reverse .section p {
+        text-align: left;
+        /* Ensure left alignment for paragraphs */
+        direction: rtl;
+        /* Ensure text flows from right to left */
+        overflow: visible;
+        /* Allow overflow to show */
+      }
+
+      /* Waves CSS */
+      .waves {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        min-height: 100px;
+        margin-bottom: -7px;
+        /* Fix for Safari gap */
+      }
+
+      .parallax {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        /* or any specific height */
+        overflow: hidden;
+        /* Prevents the waves from going outside the container */
+      }
+
+      .parallax use {
+        position: absolute;
+        bottom: 0;
+        /* Assuming the waves are at the bottom */
+        transition: transform 1s ease-out;
+        /* Smooth transition for transforms */
+      }
+
+      .tittle {
+        /*max-width: 234.5px;*/
+        margin: 10;
+        margin-top: calc(33.5%) !important;
+        font-size: 6em;
+      }
+
+      .description {
+        max-width: 350px;
+        /*color: #99daff;*/
+        color: #99daff;
+        font-size: 0.77em;
+        /* Smaller font size for a more subtle appearance */
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        padding: 12px;
+        border-radius: 8px;
+        position: relative;
+        z-index: 9999;
+        overflow: hidden;
+        /* To hide the extra content outside the rounded corners */
+        /* Lighter, more transparent background with a blue gradient */
+        background: linear-gradient(135deg, rgba(28, 60, 108, 0.8) 50%, rgba(27, 76, 156, 0.8) 50%);
+        border: 2px solid rgba(28, 68, 139, 0.7);
+        /* Softer border with a blue tone */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        /* Softer, more subtle shadow */
+      }
+
+      .description:hover {
+        box-shadow: 0px 4px 20px rgba(74, 144, 226, 0.5);
+      }
+
+      .glow:hover {
+        box-shadow: 0px 4px 20px rgba(74, 144, 226, 0.5);
+        transform: scale(1.01) !important;
+      }
+      }
+
+      .description {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+      }
+
+      .extra-box-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="backgroundCanvas"></canvas>
+    <header>
+      <h1 class="playfair-title">IThink Academy</h1>
+      <p>Initializing Thinkers in Engaging and Creative Ways!</p>
+    </header>
+    <nav>
+      <a href="#courses">Courses</a>
+      <a href="#games">Games</a>
+      <a href="#projects">Projects</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+    <div class="container">
+      <div class="extra-box-wrapper">
+        <extra-box class="extra-box" style="margin-top: -10px !important;">
+          <div>
+            <h2 class="tittle">Courses</h2>
+            <a href="Courses">
+              <p class="description">We offer a variety of specialized courses covering essential online skills—from internet safety to prepare your child for the digital world, to building digital portfolios that showcase their projects to future employers and schools.</p>
+            </a>
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+              <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+              </defs>
+              <g class="parallax">
+                <use xlink:href="#gentle-wave" x="0" y="0" fill="rgba(44, 121, 255, 0.7)" />
+                <use xlink:href="#gentle-wave" x="300" y="0" fill="rgba(44, 121, 255, 0.7)" />
+                <use xlink:href="#gentle-wave" x="0" y="3" fill="rgba(44, 121, 255, 0.5)" />
+                <use xlink:href="#gentle-wave" x="300" y="3" fill="rgba(44, 121, 255, 0.5)" />
+                <use xlink:href="#gentle-wave" x="0" y="5" fill="rgba(44, 121, 255, 0.3)" />
+                <use xlink:href="#gentle-wave" x="300" y="5" fill="rgba(44, 121, 255, 0.3)" />
+                <use xlink:href="#gentle-wave" x="0" y="7" fill="rgb(0, 61, 122)" />
+                <use xlink:href="#gentle-wave" x="300" y="7" fill="rgb(0, 61, 122)" />
+              </g>
+            </svg>
+          </div>
+          <section id="courses" class="section">
+            <a href="Courses" style="display: block; text-decoration: none; color: inherit;">
+              <h2>Explore Our Most Popular Courses</h2>
+              <p style="color: #99daff; max-width: 300px; overflow: hidden; text-overflow: ellipsis;"> Discover courses designed to empower and educate young minds in today’s digital world. </p>
+              <div class="course-cards">
+                <div class="course-card">
+                  <a href="Courses/online-safety-for-kids.html" style="display: block; color: inherit; text-decoration: none;">
+                    <h3>Online Safety for Kids</h3>
+                    <p>This course covers the latest best practices to equip kids with the skills to navigate the online world safely and responsibly.</p>
+                  </a>
+                </div>
+                <div class="course-card">
+                  <a href="Courses/digital-portfolio-creation.html" style="display: block; color: inherit; text-decoration: none;">
+                    <h3>Digital Portfolio Creation</h3>
+                    <p>Create a professional digital portfolio! Showcase your projects, skills, and resume for future employers and universities.</p>
+                  </a>
+                </div>
+                <div class="course-card">
+                  <a href="Courses/web-design-essentials.html" style="display: block; color: inherit; text-decoration: none;">
+                    <h3>Web Design Essentials</h3>
+                    <p>Master the basics of web development, including HTML and CSS, to build and customize websites.</p>
+                  </a>
+                </div>
+              </div>
+              <div class="view-more">
+                <a href="Courses">View More Courses ⇢</a>
+              </div>
+            </a>
+          </section>
+        </extra-box>
+        <extra-box class="extra-box extra-box-reverse">
+          <div>
+            <h2 class="tittle" style="margin-top: calc(14%) !important;">Games</h2>
+            <a href="Games">
+              <p class="description">We use games and interactive mediums to capture our students' attention. By incorporating game design and fun elements, students naturally engage and gain valuable knowledge about coding.</p>
+            </a>
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+              <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+              </defs>
+              <g class="parallax">
+                <use xlink:href="#gentle-wave" x="0" y="0" fill="rgba(44, 121, 255, 0.7)" />
+                <use xlink:href="#gentle-wave" x="300" y="0" fill="rgba(44, 121, 255, 0.7)" />
+                <use xlink:href="#gentle-wave" x="0" y="3" fill="rgba(44, 121, 255, 0.5)" />
+                <use xlink:href="#gentle-wave" x="300" y="3" fill="rgba(44, 121, 255, 0.5)" />
+                <use xlink:href="#gentle-wave" x="0" y="5" fill="rgba(44, 121, 255, 0.3)" />
+                <use xlink:href="#gentle-wave" x="300" y="5" fill="rgba(44, 121, 255, 0.3)" />
+                <use xlink:href="#gentle-wave" x="0" y="7" fill="rgb(0, 61, 122)" />
+                <use xlink:href="#gentle-wave" x="300" y="7" fill="rgb(0, 61, 122)" />
+              </g>
+            </svg>
+          </div>
+          <section id="games" class="section glow" style="max-width: 300px; cursor: pointer;" onclick="window.location.href='Games';" style="cursor: pointer;">
+            <h2>Game Development</h2>
+            <p style="color: #99daff;">Unlock the World of Programming Through Gaming</p>
+            <ul>
+              <li style="margin-top: 15px;" class="course-card1">
+                <strong>Game Gallery:</strong> We proudly showcase games created by students, inspiring curiosity and exploration of game mechanics
+              </li>
+              <li style="margin-top: 15px;" class="course-card1">
+                <strong>Critical Thinking:</strong> Kids are encouraged to think about how games are made, sparking creativity and innovation
+              </li>
+              <li style="margin-top: 15px;" class="course-card1">
+                <strong>Path to Innovation:</strong> These games are more than fun—they're stepping stones to a future in programming
+              </li>
+            </ul>
+            <div class="view-more" style="margin-top: 15px;">
+              <a href="Games">⇢ Game Gallery</a>
+            </div>
+          </section>
+        </extra-box>
+        <extra-box class="extra-box ">
+          <div>
+            <h2 class="tittle">Projects</h2>
+            <p class="description">Start your own projects! Follow our guides or make your own ideas come to life.</p>
+            <!-- Insert the SVG here, so it stays in this section -->
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+              <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+              </defs>
+              <g class="parallax">
+                <use xlink:href="#gentle-wave" x="0" y="0" fill="rgba(44, 121, 255, 0.7)" />
+                <use xlink:href="#gentle-wave" x="300" y="0" fill="rgba(44, 121, 255, 0.7)" />
+                <use xlink:href="#gentle-wave" x="0" y="3" fill="rgba(44, 121, 255, 0.5)" />
+                <use xlink:href="#gentle-wave" x="300" y="3" fill="rgba(44, 121, 255, 0.5)" />
+                <use xlink:href="#gentle-wave" x="0" y="5" fill="rgba(44, 121, 255, 0.3)" />
+                <use xlink:href="#gentle-wave" x="300" y="5" fill="rgba(44, 121, 255, 0.3)" />
+                <use xlink:href="#gentle-wave" x="0" y="7" fill="rgb(0, 61, 122)" />
+                <use xlink:href="#gentle-wave" x="300" y="0" fill="rgb(0, 61, 122)" />
+              </g>
+            </svg>
+          </div>
+          <section id="projects" class="section">
+            <h2>Projects</h2>
+            <p>Start your own projects! Follow our guides or make your own ideas come to life.</p>
+            <ul>
+              <li>
+                <strong>Build a Calculator:</strong> Create your own simple calculator in Python.
+              </li>
+              <li>
+                <strong>Make a Personal Website:</strong> Use HTML & CSS to show off your interests.
+              </li>
+              <li>
+                <strong>Interactive Story:</strong> Write and code a story that reacts to your choices.
+              </li>
+            </ul>
+          </section>
+        </extra-box>
+        <extra-box class="extra-box extra-box-reverse">
+          <div>
+            <h2 class="tittle" style="font-size: 2.4em;">Virtual Meeting Curriculum</h2>
+            <p class="description">.we meet alot</p>
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+              <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+              </defs>
+              <g class="parallax">
+                <use xlink:href="#gentle-wave" x="0" y="0" fill="rgba(44, 121, 255, 0.7)" />
+                <use xlink:href="#gentle-wave" x="300" y="0" fill="rgba(44, 121, 255, 0.7)" />
+                <use xlink:href="#gentle-wave" x="0" y="3" fill="rgba(44, 121, 255, 0.5)" />
+                <use xlink:href="#gentle-wave" x="300" y="3" fill="rgba(44, 121, 255, 0.5)" />
+                <use xlink:href="#gentle-wave" x="0" y="5" fill="rgba(44, 121, 255, 0.3)" />
+                <use xlink:href="#gentle-wave" x="300" y="5" fill="rgba(44, 121, 255, 0.3)" />
+                <use xlink:href="#gentle-wave" x="0" y="7" fill="rgb(0, 61, 122)" />
+                <use xlink:href="#gentle-wave" x="300" y="7" fill="rgb(0, 61, 122)" />
+              </g>
+            </svg>
+          </div>
+          <div class="snip1404">
+            <!-- Basic Plan -->
+            <div class="plan">
+              <header>
+                <h4 class="plan-title">Basic</h4>
+                <div></div>
+              </header>
+              <ul class="plan-features">
+                <li>
+                  <i class="ion-checkmark"></i>Weekly class session
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>Two project-based learning days
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>Flexible class scheduling
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>Access to Progressive Curriculum
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>24/7 Support for questions and guidance
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>Private tutorials and group discussions
+                </li>
+              </ul>
+              <div class="plan-select">
+                <li style="visibility:hidden;">&nbsp;</li>
+                <li style="visibility:hidden;">&nbsp;</li>
+                <li style="visibility:hidden;">&nbsp;</li>
+                <li style="visibility:hidden;">&nbsp;</li>
+                <li style="visibility:hidden;">&nbsp;</li>
+                <a href="#contact">Contact Us</a>
+              </div>
+            </div>
+            <!-- Plus Plan with "Most Popular" Banner -->
+            <div class="plan">
+              <!-- <div class="most-popular">Most Popular</div> -->
+              <header>
+                <h4 class="plan-title">Plus</h4>
+                <div></div>
+              </header>
+              <ul class="plan-features">
+                <li>
+                  <i class="ion-checkmark"></i>Twice-weekly class sessions
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>Weekly project-based learning days
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>Flexible class scheduling
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>Access to Progressive Curriculum
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>24/7 Support for questions and guidance
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>Private tutorials and group discussions
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>Monthly family coding night
+                </li>
+              </ul>
+              <div class="plan-select">
+                <li style="visibility:hidden;">&nbsp;</li>
+                <li style="visibility:hidden;">&nbsp;</li>
+                <a href="#contact">Contact Us</a>
+              </div>
+            </div>
+            <!-- Advanced Plan -->
+            <div class="plan">
+              <header>
+                <h4 class="plan-title">Advanced</h4>
+                <div></div>
+              </header>
+              <ul class="plan-features">
+                <li>
+                  <i class="ion-checkmark"></i>Three weekly class sessions
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>Weekly project-based learning days
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>Flexible class scheduling
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>Access to Progressive Curriculum
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>24/7 Support for questions and guidance
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>Private tutorials and group discussions
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>Monthly family coding night
+                </li>
+                <li>
+                  <i class="ion-checkmark"></i>Advanced coding bootcamps
+                </li>
+              </ul>
+              <div class="plan-select">
+                <a href="#contact">Contact Us</a>
+              </div>
+            </div>
+          </div>
+        </extra-box>
+      </div>
+    </div>
+    </div>
+    <footer id="contact">
+      <w>Contact Us: <a href="mailto:initiatingthinkers@gmail.com" style="color: #e0f7fa; text-decoration: none;">InitiatingThinkers@gmail.com</a>
+      </w>
+      <br>
+      <a>Follow us on social media for updates and new content!</a>
+    </footer>
+    <script>
+      // JavaScript to handle the scroll effect on the waves
+      window.addEventListener('scroll', function() {
+        waveryyy();
+      });
+      window.addEventListener('load', function() {
+        waveryyy();
+      });
+
+      function waveryyy() {
+        const scrollPosition = window.scrollY - 870;
+        //console.log(window.scrollY-1500);  // Output the result
+        const waves = document.querySelectorAll('.parallax use');
+        waves.forEach((wave, index) => {
+          temp = index - 4
+          if (index % 2 != 0) {
+            temp -= 1;
+          }
+          randomNumber = getRandomNumber(temp * 50);
+          speed = randomNumber / 100; // Adjust speed for each wave (can add index * 0.1 for variation)
+          if (index > 9) {
+            speed += 0.01;
+          } else {
+            speed = -speed / 2
+          }
+          // Smooth out wave position calculation by scaling with scroll position
+          let movement = scrollPosition * speed;
+          // Reset movement to create continuous effect using modulo
+          movement = movement / 1; // Adjust this value to determine when the wave should loop
+          // Offset for continuous loop, alternate based on index for proper effect
+          if (index % 2 == 0) {
+            movement -= 51.98;
+          }
+          if ((index > 16) && (index < 29)) {
+            movement -= randomNumber;
+          }
+          if(index == 22){
+            movement += 80;
+          }
+           if(index == 8){
+            movement += 180;
+          }
+          if(index == 9){
+            movement += 180;
+          }
+          if (index > 29) {
+            movement -= 100;
+          }
+          //console.log(temp*50);  // Output the result
+          //move = Math.floor((movement + randomNumber) / 10) * 10;
+          // Apply transformation directly without transition to make the movement smooth
+          wave.style.transform = `translateX(${movement + randomNumber}px)`;
+          //wave.setAttribute('x', movement + randomNumber);
+        });
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        // Delay the start of the script by 3 seconds
+        setTimeout(function() {
+          // Get all extra-boxes
+          const extraBoxes = document.querySelectorAll('.extra-box');
+          // Function to toggle slide direction and visibility when an element enters the viewport
+          function toggleSlideInOut(entries, observer) {
+            entries.forEach(entry => {
+              const box = entry.target;
+              const index = [...extraBoxes].indexOf(box); // Get the index of the box
+              if (entry.isIntersecting) {
+                // Make the box visible
+                box.classList.add('visible'); // Add visibility class
+                // If the box is in the viewport, slide it in
+                if (index % 2 === 0) {
+                  box.classList.add('slideInLeft'); // Even boxes slide in from the left
+                  box.classList.remove('slideOutLeft', 'slideOutRight');
+                } else {
+                  box.classList.add('slideInRight'); // Odd boxes slide in from the right
+                  box.classList.remove('slideOutLeft', 'slideOutRight');
+                }
+              } else {
+                // If the box is out of the viewport, slide it out
+                box.classList.remove('visible'); // Hide the box
+                if (index % 2 === 0) {
+                  box.classList.add('slideOutLeft'); // Even boxes slide out to the left
+                  box.classList.remove('slideInLeft', 'slideInRight');
+                } else {
+                  box.classList.add('slideOutRight'); // Odd boxes slide out to the right
+                  box.classList.remove('slideInLeft', 'slideInRight');
+                }
+              }
+            });
+          }
+          // Create an IntersectionObserver to observe when the boxes enter/exit the viewport
+          const observer = new IntersectionObserver(toggleSlideInOut, {
+            root: null, // Observing relative to the viewport
+            rootMargin: '20px', // Trigger when fully visible
+          });
+          // Observe each extra-box element
+          extraBoxes.forEach(box => {
+            observer.observe(box);
+          });
+        }, 100); // Delay the execution by 100ms (or set to your desired time)
+      });
+
+      function getRandomNumber(seed) {
+        const a = 1664525;
+        const c = 1013904223;
+        const m = Math.pow(2, 32);
+        // Apply the LCG formula
+        seed = (a * seed + c) % m;
+        // Return a random number between 1 and 50
+        return Math.floor((seed / m) * 100) - 50;
+      }
+      // Canvas Background Animation
+      const canvas = document.getElementById('backgroundCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      let particlesArray = [];
+      let particleAnimationActive = true; // Flag to control the particle animation
+      const animationDuration = 3000; // Duration for the animations in milliseconds
+      class Particle {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.size = Math.random() * 5 + 1;
+          this.speedX = Math.random() * 3 - 1.5;
+          this.speedY = Math.random() * 3 - 1.5;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.size > 0.2) this.size -= 0.1; // Decrease size gradually
+        }
+        draw() {
+          ctx.fillStyle = 'rgba(174, 194, 224, 1)'; // Change particle fill color
+          ctx.strokeStyle = '#42a5f5'; // Change particle stroke color
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+        }
+      }
+      // Function to initialize particles
+      function initParticles() {
+        particlesArray = [];
+        for (let i = 0; i < 100; i++) {
+          const x = Math.random() * canvas.width;
+          const y = Math.random() * canvas.height;
+          particlesArray.push(new Particle(x, y));
+        }
+      }
+      // Function to animate particles
+      function animateParticles() {
+        if (!particleAnimationActive) return; // Stop the animation if the flag is false
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+        for (let i = 0; i < particlesArray.length; i++) {
+          particlesArray[i].update();
+          particlesArray[i].draw();
+          if (particlesArray[i].size <= 0.3) {
+            particlesArray.splice(i, 1); // Remove particles that are too small
+            i--;
+          }
+        }
+        requestAnimationFrame(animateParticles);
+      }
+      // Check if the device is mobile (screen width less than 768px)
+      const isMobile = window.innerWidth < 768;
+      // Start the animations after the DOM is fully loaded
+      document.addEventListener('DOMContentLoaded', () => {
+        // Initialize and animate particles if not on mobile
+        if (!isMobile) {
+          initParticles();
+          animateParticles(); // Start animating particles immediately
+          // Stop the particle animation after 1000ms
+          setTimeout(() => {
+            particleAnimationActive = false; // Set the flag to false to stop animation
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas when stopping
+          }, animationDuration);
+        }
+        // Star animation setup
+        const stars = [];
+        const numstars = 100; // Number of animated stars
+        // Generate random stars
+        for (let i = 0; i < numstars; i++) {
+          stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            length: Math.random() * 0.5 + 0, // Random length
+            angle: Math.random() * Math.PI * 2, // Random angle
+            speed: Math.random() * 0.7 + 0.1 // Random speed
+          });
+        }
+        // Draw loop for stars
+        function animateStars() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          // Draw particles first if on PC
+          if (!isMobile && particleAnimationActive) {
+            for (let i = 0; i < particlesArray.length; i++) {
+              particlesArray[i].draw();
+            }
+          }
+          // Draw stars
+          stars.forEach(star => {
+            // Calculate star endpoint based on angle and length
+            const endX = star.x + Math.cos(star.angle) * star.length;
+            const endY = star.y + Math.sin(star.angle) * star.length;
+            // Draw the animated star
+            ctx.beginPath();
+            ctx.moveTo(star.x, star.y);
+            ctx.lineTo(endX, endY);
+            ctx.strokeStyle = '#42a5f5'; // Star color
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            // Update star position for animation
+            star.x += Math.cos(star.angle) * star.speed;
+            star.y += Math.sin(star.angle) * star.speed;
+            // Reset position if it goes off-screen
+            if (star.x > canvas.width || star.x < 0 || star.y > canvas.height || star.y < 0) {
+              star.x = Math.random() * canvas.width;
+              star.y = Math.random() * canvas.height;
+            }
+          });
+          requestAnimationFrame(animateStars);
+        }
+        // Start the star animation
+        animateStars();
+      });
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        if (!isMobile) {
+          initParticles(); // Reinitialize particles on resize
+        }
+      });
+      // Function to scroll to the specified section based on the hash
+      function scrollToSection() {
+        let hash = window.location.hash; // Get the current URL hash
+        if (hash) {
+          // Remove the last character from the hash
+          hash = hash.slice(0, -1);
+          const targetSection = document.querySelector(hash); // Select the target section
+          if (targetSection) {
+            // Scroll to the section smoothly
+            window.scrollTo({
+              top: absoluteY - (window.innerHeight / 2) + (targetSection.offsetHeight / 2),
+              left: 0,
+              behavior: 'smooth'
+            });
+          }
+        }
+      }
+      // Set scroll position to the top and wait until the page is fully loaded before scrolling with a delay
+      window.onload = function() {
+        window.scrollTo(0, 0); // Scroll to the top
+        // Set a delay of 1 second (1000 milliseconds) before scrolling
+        setTimeout(scrollToSection, 1);
+      };
+      // Smooth scroll functionality for navigation links
+      document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault(); // Prevent default anchor click behavior
+          const targetId = this.getAttribute('href'); // Get the href attribute
+          const targetSection = document.querySelector(targetId); // Select the target section
+          // Get the target section's parent element
+          const parent = targetSection.parentElement;
+          // Get the target section's offset relative to its parent container
+          const targetY = targetSection.offsetTop - parent.offsetTop;
+          console.log(targetY); // Logs the Y value relative to the parent container
+          // Or use getBoundingClientRect() for a more reliable position
+          const rect = targetSection.getBoundingClientRect();
+          const absoluteY = rect.top + window.scrollY; // Gets position relative to document
+          console.log(absoluteY); // Logs the absolute Y value (relative to the document)
+          if (targetSection) {
+            // Smoothly scroll to the target section
+            /*
+            targetSection.scrollIntoView({
+              behavior: 'smooth',
+              left: 0,
+              block: 'start'
+            });
+            */
+            window.scrollTo({
+              top: absoluteY - (window.innerHeight / 2) + (targetSection.offsetHeight / 2),
+              left: 0,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+        window.onload = function() {
+            const isMobile = window.innerWidth <= 768; // Check if on mobile
+            const currentHash = window.location.hash; // Get the current hash (e.g., #parts)
+    
+            // Set target HTML file based on device type
+            const targetFile = isMobile ? "mobile.html" : "desktop.html";
+    
+            // Redirect to the target file with the hash
+            window.location.href = targetFile + currentHash;
+        };
+
+    </script>
+  </body>
+</html>
