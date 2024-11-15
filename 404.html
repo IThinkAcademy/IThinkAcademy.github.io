@@ -319,7 +319,61 @@ h1, h2, p, .button {
 
         // Create particles at a set interval
         setInterval(createParticle, speed); // Create a new particle every 50ms
+      // List of valid URLs
+      const validUrls = ["/Games", "/Courses", "/Contact"];
+      // Function to calculate the Levenshtein distance
+      function levenshteinDistance(a, b) {
+        const matrix = [];
+        for (let i = 0; i <= b.length; i++) {
+          matrix[i] = [i];
+        }
+        for (let j = 0; j <= a.length; j++) {
+          matrix[0][j] = j;
+        }
+        for (let i = 1; i <= b.length; i++) {
+          for (let j = 1; j <= a.length; j++) {
+            if (b.charAt(i - 1) === a.charAt(j - 1)) {
+              matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+              matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, // Substitution
+                matrix[i][j - 1] + 1, // Insertion
+                matrix[i - 1][j] + 1 // Deletion
+              );
+            }
+          }
+        }
+        return matrix[b.length][a.length];
+      }
+      // Function to find the closest match
+      function findClosestMatch(url, validUrls) {
+        let closestMatch = null;
+        let lowestDistance = Infinity;
+        validUrls.forEach(validUrl => {
+          const distance = levenshteinDistance(url, validUrl);
+          if (distance < lowestDistance) {
+            lowestDistance = distance;
+            closestMatch = validUrl;
+          }
+        });
+        return {
+          closestMatch,
+          lowestDistance
+        };
+      }
+      // Get the current URL path
+      const currentPath = window.location.pathname;
+      // Find the closest valid URL
+      const {
+        closestMatch,
+        lowestDistance
+      } = findClosestMatch(currentPath, validUrls);
+      // Set a threshold for the distance (e.g., 5 is reasonable for short URLs)
+      const threshold = 5;
+      if (closestMatch && lowestDistance <= threshold) {
+        setTimeout(() => {
+          window.location.href = closestMatch;
+        }, 0);
+      }
     </script>
-
-</body>
+  </body>
 </html>
