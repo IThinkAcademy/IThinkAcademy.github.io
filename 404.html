@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="/my-favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/my-favicon/favicon.svg" />
+<link rel="shortcut icon" href="/my-favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/my-favicon/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="IThink" />
+<link rel="manifest" href="/my-favicon/site.webmanifest" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>404 - Page Not Found</title>
+
+   <style>
+/* Global styles for dark theme */
+body {
+    background-color: #1c1c1c;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+* {
+  user-select: none;
+}
+
+/* Centered container */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    padding-top: 50px; /* Move the content lower */
+}
+
+/* Title and subtitle styling */
+h1, h2 {
+    font-size: 3rem;
+    color: #3498db; /* Blue accent */
+    margin-bottom: -10px; /* Decrease gap between headers */
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+/* Message paragraph styling */
+p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+}
+
+/* Button style */
+.button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+
+/* Hover effect for the button */
+.button:hover {
+    background-color: #2980b9;
+}
+
+/* 404 Page specific animations */
+.circle {
+    opacity: 0;
+    width: 800px;
+    height: 800px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: fadeIn .1s ease forwards;
+    animation: circle 0.7s cubic-bezier(0.4, 0.35, 0, 1.53) forwards;
+    animation-delay: .9s; /* Delay of 1 second */
+}
+
+/* Title, subtitle, and button with delay */
+h1, h2, p, .button {
+    opacity: 0; /* Start hidden */
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 1s; /* Delay of 1 second */
+}
+
+/* Keyframe for fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Circle animation */
+@keyframes circle {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 100;
+    }
+    100% {
+        opacity: 100;
+        width: 800px;
+        height: 800px;
+    }
+}
+
+/* Disable animations on mobile */
+@media screen and (max-width: 768px) {
+    /* Remove animations for title, subtitle, paragraph, and button */
+    h1, h2, p, .button {
+        animation: none; /* Disable animation */
+        opacity: 1; /* Ensure they are visible immediately */
+    }
+
+    /* Remove circle animation on mobile */
+    .circle {
+      opacity: 1;
+        animation: none; /* Disable circle animation */
+        width: 800px; /* Set a static width */
+        height: 800px; /* Set a static height */
+    }
+}
+
+/* Error code styling */
+.error-code-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.error-code {
+    font-size: 200px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: white;
+    opacity: 0;
+    transform: scale(10) skew(20deg, 20deg);
+    animation: p404-animation .7s ease forwards;
+    margin-bottom: -37px;
+    margin-top: -97px;
+}
+
+/* Animation for error code */
+@keyframes p404-animation {
+    100% {
+        opacity: 1;
+        transform: scale(1) skew(0deg, 0deg);
+    }
+}
+
+/* Button positioning for 404 page */
+.button {
+    position: relative;
+    z-index: 5;
+}
+
+/* Container for particles */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background-color: #3498db;
+    opacity: 0.8;
+    transform: rotate(135deg); /* Raindrop facing 135 degrees */
+    animation: fall 4s linear infinite;
+}
+
+/* Raindrop falling animation */
+@keyframes fall {
+    0% {
+        opacity: 1;
+        transform: translateX(var(--start-x)) translateY(var(--start-y)) rotate(135deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(calc(var(--start-x) + max(20px, var(--end-x)))) translateY(var(--end-y)) rotate(135deg);
+    }
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2rem; /* Smaller font for mobile */
+    }
+    h2 {
+        font-size: 1.5rem; /* Smaller font for mobile */
+    }
+    p {
+        font-size: .95rem; /* Smaller font for mobile */
+    }
+    .particle {
+     background-color: #101d91; 
+    }
+    .circle {
+        width: 400px !important;
+        height: 400px !important;
+        top: 60% !important; /* Adjust circle position */
+    }
+
+    .error-code {
+        color: #005c99;
+        font-size: 150px !important;
+    }
+
+    .error-code-wrapper {
+        top: 10%; /* Adjust position relative to content */
+    }
+
+    .button {
+        color: #9dafb0;
+        background-color: #005c99;
+        padding: 12px 30px; /* Make button slightly larger */
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .circle {
+        width: 300px;
+        height: 300px;
+        top: 40%; /* Further adjust circle size */
+    }
+
+    .error-code {
+        font-size: 80px; /* Smaller font for very small screens */
+    }
+
+    .button {
+        padding: 12px 20px;
+        font-size: 0.8rem;
+    }
+}
+
+</style>
+
+</head>
+<body>
+    <div class="container">
+     <!-- Wrapper for the 404 text -->
+        <div class="error-code-wrapper">
+            <div class="error-code">404</div>
+        </div>
+        <h1>Oops! Page Not Found</h1>
+        <h2>We're still working on it!</h2>
+        <p>Don't worry, you can always return to the home page.</p>
+        <a href="/" class="button">Return Home</a>
+
+    </div>
+
+    <section class="error-section">
+        <div class="circle"></div>
+    </section>
+
+    <div class="particles" id="particles"></div>
+
+
+    <script>
+    
+    let speed = (window.innerWidth < 768 ? 17 : 1)
+    let offset = (window.innerWidth < 768 ? 70 : 300)
+        // Function to create raindrop particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+
+            // Random starting position off-screen from the top left
+            const startX = (Math.random()  * (window.innerWidth/1.4) - offset); // Start off-screen left
+            const startY = Math.random() * -1000; // Start above the screen
+            const endX = Math.random() * window.innerWidth; // End position across the screen
+            const endY = window.innerHeight + 100; // End position below the screen
+
+            // Set particle's CSS variables for animation
+            particle.style.setProperty('--start-x', `${startX}px`);
+            particle.style.setProperty('--start-y', `${startY}px`);
+            particle.style.setProperty('--end-x', `${endX}px`);
+            particle.style.setProperty('--end-y', `${endY}px`);
+
+            // Append the particle to the particles container
+            document.getElementById('particles').appendChild(particle);
+
+            // Remove the particle once it has fallen
+            setTimeout(() => {
+                particle.remove();
+            }, 4000); // Match the animation duration
+        }
+
+        // Create particles at a set interval
+        setInterval(createParticle, speed); // Create a new particle every 50ms
+    </script>
+
+</body>
+</html>
