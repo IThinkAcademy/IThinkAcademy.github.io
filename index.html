@@ -1,39 +1,12 @@
 <script>
-    function loadContent() {
-        const isMobile = window.innerWidth <= 768;
-        const contentDiv = document.getElementById("content");
+    window.onload = function() {
+        const isMobile = window.innerWidth <= 768; // Check if on mobile
+        const currentHash = window.location.hash; // Get the current hash (e.g., #parts)
 
-        const htmlFile = isMobile ? 'mobile.html' : 'desktop.html';
+        // Set target HTML file based on device type
+        const targetFile = isMobile ? "mobile.html" : "desktop.html";
 
-        fetch(htmlFile)
-            .then(response => response.text())
-            .then(data => {
-                // Inject fetched HTML content
-                contentDiv.innerHTML = data;
-
-                // Dynamically load and execute any scripts found in the content
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = data;
-                const scripts = tempDiv.querySelectorAll('script');
-                scripts.forEach(script => {
-                    const newScript = document.createElement('script');
-                    if (script.src) {
-                        // If the script has a `src`, load it dynamically
-                        newScript.src = script.src;
-                        newScript.async = true;
-                    } else {
-                        // If the script is inline, copy its content
-                        newScript.textContent = script.textContent;
-                    }
-                    document.body.appendChild(newScript);
-                });
-            })
-            .catch(error => {
-                console.error("Error loading content: ", error);
-                contentDiv.innerHTML = "<p>Sorry, there was an error loading the content.</p>";
-            });
-    }
-
-    window.onload = loadContent;
-    window.onresize = loadContent; // Recheck on resize
+        // Redirect to the target file with the hash
+        window.location.href = targetFile + currentHash;
+    };
 </script>
