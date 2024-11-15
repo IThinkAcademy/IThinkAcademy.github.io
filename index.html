@@ -1221,10 +1221,11 @@
           const targetSection = document.querySelector(hash); // Select the target section
           if (targetSection) {
             // Scroll to the section smoothly
-            targetSection.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
+           window.scrollTo({
+            top: absoluteY - (window.innerHeight / 2) + (targetSection.offsetHeight / 2),
+            left: 0,
+            behavior: 'smooth'
+          });
           }
         }
       }
