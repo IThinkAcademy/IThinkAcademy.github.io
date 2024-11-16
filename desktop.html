@@ -1311,6 +1311,16 @@
         });
       });
     */
+       window.onload = function() {
+            const isMobile = window.innerWidth <= 768; // Check if on mobile
+            const currentHash = window.location.hash; // Get the current hash (e.g., #parts)
+    
+            // Set target HTML file based on device type
+            const targetFile = isMobile ? "mobile.html" : "desktop.html";
+    
+            // Redirect to the target file with the hash
+            window.location.href = targetFile + currentHash;
+        };
     </script>
   </body>
 </html>
