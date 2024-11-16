@@ -1274,9 +1274,15 @@
       // Set scroll position to the top and wait until the page is fully loaded before scrolling with a delay
       window.onload = function() {
         window.scrollTo(0, 0); // Scroll to the top
-        // Set a delay of 1 second (1000 milliseconds) before scrolling
-        setTimeout(scrollToSection, 1);
-      };
+
+    const isDesktop = window.innerWidth < 768; // Check if on desktop (screen width > 768px)
+    const currentHash = window.location.hash; // Get the current hash (e.g., #parts)
+
+    // Redirect to the desktop version if the device is desktop
+      if (isDesktop) {
+          window.location.href = "mobile.html" + currentHash;
+      }else{setTimeout(scrollToSection, 1);
+  };
       /*
       // Smooth scroll functionality for navigation links
       document.querySelectorAll('nav a').forEach(anchor => {
@@ -1311,16 +1317,6 @@
         });
       });
     */
-window.onload = function() {
-    const isDesktop = window.innerWidth < 768; // Check if on desktop (screen width > 768px)
-    const currentHash = window.location.hash; // Get the current hash (e.g., #parts)
-
-    // Redirect to the desktop version if the device is desktop
-    if (isDesktop) {
-        window.location.href = "mobile.html" + currentHash;
-    }
-};
-
     </script>
   </body>
 </html>
