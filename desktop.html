@@ -1249,34 +1249,27 @@
       });
       // Function to scroll to the specified section based on the hash
      function scrollToSection() {
-    window.scrollTo(0, 0); // Scroll to the top of the page first
+        window.scrollTo(0, 0);
+        let hash = window.location.hash; // Get the current URL hash
+        if (hash) {
+          // Remove the last character from the hash
+          console.log(hash);
+          hash = hash.slice(0, -1);
+          const targetSection = document.querySelector(hash); // Select the target section
+          const parent = targetSection.parentElement;
+          const targetY = targetSection.offsetTop - parent.offsetTop;
+          const rect = targetSection.getBoundingClientRect();
+          const absoluteY = rect.top + window.scrollY; // Gets position relative to document
 
-    let hash = window.location.hash; // Get the current URL hash
-    if (hash) {
-        // Log the original hash (for debugging purposes)
-        console.log(hash);
-
-        // Remove the hash's '#' symbol (if any) and select the target section
-        hash = hash.slice(1);
-        const targetSection = document.getElementById(hash); // Use getElementById instead of querySelector for better matching
-        
-        if (targetSection) {
-            // Get the position of the target section relative to the document
-            const rect = targetSection.getBoundingClientRect();
-            const absoluteY = rect.top + window.scrollY; // Position relative to the document
-
-            // Log the calculated position (for debugging purposes)
-            console.log(absoluteY);
-
+          console.log(absoluteY);
+          if (targetSection) {
             // Scroll to the section smoothly
             window.scrollTo({
-                top: absoluteY - (window.innerHeight / 2) + (targetSection.offsetHeight / 2),
-                left: 0,
-                behavior: 'smooth'
+              top: absoluteY - (window.innerHeight / 2) + (targetSection.offsetHeight / 2),
+              left: 0,
+              behavior: 'smooth'
             });
-        }
-    }
-}
+          }
 
       // Set scroll position to the top and wait until the page is fully loaded before scrolling with a delay
       window.onload = function() {
