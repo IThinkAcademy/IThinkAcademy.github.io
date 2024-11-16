@@ -1249,9 +1249,11 @@
       });
       // Function to scroll to the specified section based on the hash
       function scrollToSection() {
+        window.scrollTo(0, 0);
         let hash = window.location.hash; // Get the current URL hash
         if (hash) {
           // Remove the last character from the hash
+          console.log(hash);
           hash = hash.slice(0, -1);
           const targetSection = document.querySelector(hash); // Select the target section
           if (targetSection) {
@@ -1270,7 +1272,7 @@
         // Set a delay of 1 second (1000 milliseconds) before scrolling
         setTimeout(scrollToSection, 1);
       };
-
+      /*
       // Smooth scroll functionality for navigation links
       document.querySelectorAll('nav a').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -1294,7 +1296,7 @@
               left: 0,
               block: 'start'
             });
-            */
+            *-/
             window.scrollTo({
               top: absoluteY - (window.innerHeight / 2) + (targetSection.offsetHeight / 2),
               left: 0,
@@ -1303,7 +1305,7 @@
           }
         });
       });
-
+    */
     </script>
   </body>
 </html>
