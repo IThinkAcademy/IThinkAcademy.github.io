@@ -1281,7 +1281,10 @@
     // Redirect to the desktop version if the device is desktop
       if (isDesktop) {
           window.location.href = "mobile.html" + currentHash;
-      }else{setTimeout(scrollToSection, 1);
+      }
+      else{
+        setTimeout(scrollToSection, 1);
+      }
   };
       /*
       // Smooth scroll functionality for navigation links
